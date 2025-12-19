@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://c4t0rlacap6pt"]
+[gd_scene load_steps=27 format=3 uid="uid://c4t0rlacap6pt"]
 
 [ext_resource type="Texture2D" uid="uid://cd7g20m3jog3x" path="res://asset/log.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://du5jhs80dpei3" path="res://scenes/enemy.gd" id="1_md0e3"]
@@ -183,6 +183,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_md0e3"]
+radius = 9.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(18, 24)
 
@@ -198,11 +201,15 @@ z_index = 2
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_2pwtc")
 animation = &"left"
-frame_progress = 0.9290585
+frame_progress = 0.49199998
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 0.5
 target_desired_distance = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_md0e3")
 
 [node name="Area2D" type="Area2D" parent="."]
 

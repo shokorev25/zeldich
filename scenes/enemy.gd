@@ -19,18 +19,22 @@ var idle_timer := 0.0
 @export var attack_cooldown := 1.0
 
 var attack_timer := 0.0
-
+@export var attack_delay := 1  # время в секундах перед атакой
+var attack_wait_timer := 0.0
+var is_waiting_attack := false
 
 func _ready():
 	randomize()
 	hero = get_node(hero_node_path)
+	
+	# Настройка NavigationAgent
+	nav_agent.path_desired_distance = 5.0  # чуть больше, чтобы не прилипал
+	nav_agent.target_desired_distance = 5.0
 
-	nav_agent.path_desired_distance = 0.5
-	nav_agent.target_desired_distance = 0.5
 
 func _physics_process(delta):
-	if hero == null:
-		return
+	if hero == null or not is_instance_valid(hero):
+		return  # если герой ещё не существует, просто ждём
 
 	attack_timer -= delta
 
@@ -61,32 +65,48 @@ func process_idle(delta):
 	velocity = idle_dir * speed * 0.5
 
 func process_agro(delta):
+	if hero == null:
+		return
+
+	# обновляем цель каждый кадр
 	nav_agent.target_position = hero.global_position
+	if nav_agent.get_target_position() != hero.global_position:
+		nav_agent.force_update_path()
 
 	var dist = global_position.distance_to(hero.global_position)
 
-	# если близко — атакуем
+	# смерть от атаки героя
+	if hero.is_currently_attacking() and dist <= attack_range:
+		queue_free()
+		return
+
+	# если герой в зоне атаки
 	if dist <= attack_range:
 		velocity = Vector2.ZERO
 
-		if attack_timer <= 0:
-			attack_timer = attack_cooldown
-			anim_sprite.play("attack")
-			hero.take_damage(damage)
-			
-			var push_dir = (hero.global_position - global_position).normalized()
-			hero.velocity = push_dir * 60
-			hero.move_and_slide()
+		if not is_waiting_attack:
+			# начинаем ждать перед атакой
+			is_waiting_attack = true
+			attack_wait_timer = attack_delay
+		else:
+			attack_wait_timer -= delta
+			if attack_wait_timer <= 0 and attack_timer <= 0:
+				attack_timer = attack_cooldown
+				anim_sprite.play("attack")
+				hero.take_damage(damage)
+				is_waiting_attack = false  # сбрасываем ожидание после удара
+
 		return
 
-	var next_pos = nav_agent.get_next_path_position()
-	var dir = hero.global_position - global_position
-
-	if next_pos.distance_to(global_position) > 1.0:
-		dir = next_pos - global_position
-
-	velocity = dir.normalized() * speed
-
+	# движение по пути NavigationAgent
+	is_waiting_attack = false  # если отходим, сбрасываем ожидание
+	if not nav_agent.is_navigation_finished():
+		var next_pos = nav_agent.get_next_path_position()
+		var dir = (next_pos - global_position).normalized()
+		velocity = dir * speed
+	else:
+		var dir = (hero.global_position - global_position).normalized()
+		velocity = dir * speed
 
 func play_animation():
 	if velocity.length() < 1:
