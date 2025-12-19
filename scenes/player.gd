@@ -1,40 +1,51 @@
 extends CharacterBody2D
 
 @export var speed = 80.0 # Скорость игрока
-@onready var sprite = $Sprite2D # Ссылка на спрайт
+@onready var anim_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+var is_attacking := false
+
+func is_currently_attacking() -> bool:
+	return is_attacking
+
+func _ready():
+	# Подписываемся на сигнал окончания анимации
+	anim_sprite.connect("animation_finished", Callable(self, "_on_animation_finished"))
 
 func _physics_process(delta):
-	# Получаем направление нажатий стрелочек или WASD
-	# ui_right, ui_left и т.д. - это встроенные кнопки (стрелки)
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	
-	if direction:
-		velocity = direction * speed
-	else:
-		# Если ничего не жмем, скорость плавно гаснет до 0
-		velocity = velocity.move_toward(Vector2.ZERO, speed)
 
+	# Если нажата атака и мы еще не атакуем
+	if Input.is_action_just_pressed("attack") and not is_attacking:
+		is_attacking = true
+		anim_sprite.play("attack_down")
+		velocity = Vector2.ZERO  # останавливаем игрока на время атаки
+	elif not is_attacking:
+		# движение разрешено только если не атакуем
+		if direction != Vector2.ZERO:
+			velocity = direction * speed
+			play_run(direction)
+		else:
+			velocity = velocity.move_toward(Vector2.ZERO, speed)
+			play_idle()
+	
 	move_and_slide()
-	update_animation(direction)
 
-func update_animation(dir):
-	# Если мы стоим на месте (вектор движения равен 0,0), ничего не меняем
-	if dir == Vector2.ZERO:
-		return
+
+func _on_animation_finished():
+	if anim_sprite.animation.begins_with("attack"):
+		is_attacking = false
+
+func play_run(dir: Vector2):
+	var anim := ""
+	if abs(dir.y) > abs(dir.x):
+		anim = "run_down" if dir.y > 0 else "run_up"
+	else:
+		anim = "run_right" if dir.x > 0 else "run_left"
 	
-	# Простейшая анимация поворота (пока без шагов)
-	# Меняем кадры (frame_coords) в зависимости от направления
-	# Hframes у нас 4. Vframes 10.
-	# Предположим: 0 ряд - вниз, 1 - вверх, 2 - вбок. (Надо сверить с вашей картинкой)
-	
-	# ВНИМАНИЕ: Тут нужно подбирать числа Y под вашу картинку character.png!
-	# Я пишу примерные координаты (x - колонка, y - ряд)
-	
-	if dir.y > 0: # Идем ВНИЗ
-		sprite.frame_coords.y = 0 # 0-й ряд сверху
-	elif dir.y < 0: # Идем ВВЕРХ
-		sprite.frame_coords.y = 1 # 1-й ряд
-	
-	if dir.x != 0: # Идем ВБОК
-		sprite.frame_coords.y = 2 # 2-й ряд
-		sprite.flip_h = (dir.x < 0) # Если идем влево, зеркалим спрайт
+	if anim_sprite.animation != anim:
+		anim_sprite.play(anim)
+
+func play_idle():
+	if anim_sprite.animation != "default":
+		anim_sprite.play("default")
