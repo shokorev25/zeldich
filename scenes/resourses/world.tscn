@@ -1,13 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://hlfdr63jkog8"]
+[gd_scene load_steps=10 format=3 uid="uid://hlfdr63jkog8"]
 
 [ext_resource type="TileSet" uid="uid://cm5x8tsa5luhe" path="res://scenes/resourses/world.tres" id="1_ylo3w"]
 [ext_resource type="PackedScene" uid="uid://b6v1ucw84b8k0" path="res://scenes/player.tscn" id="2_pksrh"]
 [ext_resource type="PackedScene" uid="uid://c4t0rlacap6pt" path="res://scenes/enemy.tscn" id="3_pksrh"]
+[ext_resource type="Script" uid="uid://bxwkacrfbjfr2" path="res://scenes/resourses/ui.gd" id="4_3wrfg"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_pksrh"]
+vertices = PackedVector2Array(548.0078, 69.53906, 561.3828, 125.25781, 517.1875, 126.22656, 481.14844, 65.609375, 483.14063, 208.11719, 523.6875, 208.13281, 969.7031, 186.59375, 978, 294.3828, 978, 343.53125, 942.71875, 338.6797, 913.3672, 296.1797, 879.1406, 182.57031, 847.9297, 192.72656, 848.9219, 46.632813, 877.1328, 48.398438, 847.96875, 293.96094, 747.5, 287.2422, 773.6172, 194.78906, 765.5469, 314.0078, 372.14844, 364.92188, 316, 270.92188, 316, 206.11719, 761.6875, 367.92188, 66.796875, 379.89844, 65.1875, 295.92188, 195, 294.92188, 275.52344, 377.90625, 725.5, 151, 728.4922, 209.47656, 664.8203, 212.46875, 612.5625, 151, 602.4219, 215.88281, 666.1797, 284.70313, 195, 271.90625, 369.14063, 561.09375, 284.52344, 561.89844)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5), PackedInt32Array(6, 7, 8, 9, 10, 11), PackedInt32Array(12, 13, 14, 11, 15), PackedInt32Array(11, 10, 15), PackedInt32Array(16, 17, 12, 15, 18), PackedInt32Array(19, 20, 21, 4, 22), PackedInt32Array(23, 24, 25, 26), PackedInt32Array(27, 28, 29, 30), PackedInt32Array(31, 30, 29, 32), PackedInt32Array(26, 25, 33, 20, 19), PackedInt32Array(19, 34, 35, 26), PackedInt32Array(22, 4, 5, 32), PackedInt32Array(32, 16, 18, 22), PackedInt32Array(32, 5, 31)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(57, 390, 55, 286, 185, 285, 185, 262, 306, 261, 306, 196, 306, 196, 473, 198, 471, 55, 556, 60, 574, 135, 528, 136, 533, 199, 594, 205, 604, 141, 735, 141, 739, 219, 675, 222, 676, 275, 740, 277, 766, 185, 838, 183, 839, 36, 887, 39, 889, 173, 979, 177, 988, 294, 988, 355, 937, 348, 908, 306, 849, 304, 775, 322, 771, 378, 382, 375, 379, 571, 275, 572, 266, 388)])
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wrfg"]
+size = Vector2(1059, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbl61"]
+size = Vector2(23, 650)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2psxj"]
+size = Vector2(1039, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b2qlk"]
+size = Vector2(11, 660)
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 
 [node name="TileMap" type="TileMap" parent="."]
+light_mask = 3
 y_sort_enabled = true
 position = Vector2(41, 2)
 tile_set = ExtResource("1_ylo3w")
@@ -24,8 +43,45 @@ layer_2/z_index = 2
 layer_2/tile_data = PackedInt32Array(196664, 655360, 22, 131127, 720896, 23, 851971, 327680, 16, 524297, 327680, 16, 851974, 327680, 16, 917513, 327680, 16, 917517, 327680, 16, 1048581, 327680, 16, 327686, 327680, 16, 65541, 327680, 16, 393219, 327680, 16, 393255, 327680, 16, 327721, 327680, 16, 196648, 327680, 16, 65576, 327680, 16, 65582, 327680, 16, 196654, 327680, 16, 327726, 327680, 16, 393261, 327680, 16, 1638405, 327680, 16, 1638400, 327680, 16, 1638406, 327680, 16, 1638408, 327680, 16, 1638407, 327680, 16, 1638409, 327680, 16, 1638410, 327680, 16, 1638411, 327680, 16, 1703947, 327680, 16, 1769483, 327680, 16, 1835019, 327680, 16, 1900555, 327680, 16, 1966091, 327680, 16, 2097163, 327680, 16, 2031627, 327680, 16, 2162699, 327680, 16, 2228235, 327680, 16, 2293771, 327680, 16, 2293770, 327680, 16, 2293769, 327680, 16, 2293768, 327680, 16, 2293767, 327680, 16, 2293766, 327680, 16, 2293765, 327680, 16, 2293764, 327680, 16, 2293763, 327680, 16, 2293762, 327680, 16, 2293760, 327680, 16, 2293761, 327680, 16, 2228224, 327680, 16, 2162688, 327680, 16, 2097152, 327680, 16, 2162697, 1572864, 20, 2097157, 1572864, 20, 2162694, 1835008, 20, 2162690, 1900544, 20, 2162695, 2162688, 0, 1703943, 2162688, 0, 1703945, 2162688, 0, 2162691, 2162688, 0, 1703941, 2031616, 0, 1769498, 851968, 5, 1835044, 1835008, 6, 1966108, 2162688, 5, 2162717, 1835008, 9, 2097187, 1376256, 20, 2162721, 1376256, 20, 2031654, 2031616, 3, 1966134, 2031616, 3, 1966116, 1769472, 3, 1638422, 131072, 17, 1703958, 131072, 17, 1769494, 131072, 17, 1835030, 131072, 17, 1900566, 131072, 17, 1966102, 131072, 17, 2031638, 131072, 17, 2097174, 131072, 17, 2162710, 131072, 17, 2228246, 131072, 17, 2293782, 131072, 17, 2293783, 0, 19, 2293784, 0, 19, 2293785, 0, 19, 2293786, 0, 19, 2293787, 0, 19, 2293788, 0, 19, 2293789, 0, 19, 2293790, 0, 19, 2293791, 0, 19, 2293792, 0, 19, 2293793, 0, 19, 2293794, 0, 19, 2293795, 0, 19, 2293796, 0, 19, 2293797, 0, 19, 2293798, 0, 19, 2293799, 0, 19, 2293800, 0, 19, 2293801, 0, 19, 2293802, 0, 19, 2293803, 0, 19, 2228268, 196608, 17, 2162732, 196608, 17, 2097196, 196608, 17, 2031660, 196608, 17, 1966124, 196608, 17, 1900588, 196608, 17, 1835052, 196608, 17, 1769516, 196608, 17, 1703980, 196608, 17, 1638444, 196608, 17, 1572887, 0, 19, 1572888, 0, 19, 1572889, 0, 19, 1572890, 0, 19, 1572891, 0, 19, 1572892, 0, 19, 1572893, 0, 19, 1572894, 0, 19, 1572907, 0, 19, 1572906, 0, 19, 1572905, 0, 19, 1572904, 0, 19, 1572903, 0, 19, 1572902, 0, 19, 1572901, 0, 19, 1572900, 0, 19, 1572899, 0, 19, 1572898, 0, 19)
 
 [node name="Player" parent="." instance=ExtResource("2_pksrh")]
-y_sort_enabled = true
+position = Vector2(307, 104)
 
 [node name="enemy" parent="." instance=ExtResource("3_pksrh")]
 position = Vector2(334, 305)
 hero_node_path = NodePath("../Player")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_pksrh")
+
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("4_3wrfg")
+hero_path = NodePath("../Player")
+
+[node name="HPLabel" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 64
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(519.5, -35.5)
+shape = SubResource("RectangleShape2D_3wrfg")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(-1.5, 286)
+shape = SubResource("RectangleShape2D_xbl61")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(515.5, 620)
+shape = SubResource("RectangleShape2D_2psxj")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(1039.5, 295)
+shape = SubResource("RectangleShape2D_b2qlk")

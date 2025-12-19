@@ -275,7 +275,6 @@ zoom = Vector2(2, 2)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 2
-y_sort_enabled = true
 position = Vector2(0, 9)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_g2els")
@@ -285,3 +284,4 @@ z_index = 2
 y_sort_enabled = true
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_smehm")
+animation = &"attack_up"
