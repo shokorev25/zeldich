@@ -4,13 +4,14 @@ extends Node2D
 
 
 @export var tilemap_path: NodePath
+@onready var hero := get_node_or_null("Player")
 
 func _ready():
-	var hero := get_node_or_null("Player")
+	
 	if hero == null:
 		push_error("Hero не найден в сцене")
 		return
-
+	hero.hp = PlayerData.previous_scene_player_hp
 	var tilemap := get_node_or_null(tilemap_path)
 	if tilemap == null:
 		push_error("TileMap не найден")
@@ -29,4 +30,5 @@ func _process(delta: float) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	#print(body)
 	if "Player" in body.name:
+		PlayerData.previous_scene_player_hp = hero.hp
 		get_tree().change_scene_to_file("res://cave.tscn")
