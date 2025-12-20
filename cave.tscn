@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://b6yq1b8tk0or2"]
+[gd_scene load_steps=23 format=3 uid="uid://b6yq1b8tk0or2"]
 
 [ext_resource type="Texture2D" uid="uid://dnydk18nyagik" path="res://asset/cave.png" id="1_ads45"]
 [ext_resource type="Script" uid="uid://dryjsv41gk4en" path="res://cave.gd" id="1_xtwoi"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://yn86viinomhs" path="res://scenes/UI/pause_menu.tscn" id="7_djsbv"]
 [ext_resource type="Texture2D" uid="uid://cakikteh4nq85" path="res://asset/coin.png" id="9_c2qy3"]
 [ext_resource type="Texture2D" uid="uid://dw4seydymyyi4" path="res://asset/heart.png" id="9_wkdm5"]
+[ext_resource type="PackedScene" uid="uid://b38aobkagdcfr" path="res://scenes/UI/lose_menu.tscn" id="11_3ayon"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_23xot"]
 texture = ExtResource("1_ads45")
@@ -1534,7 +1535,7 @@ tile_set = SubResource("TileSet_78gyg")
 format = 2
 layer_0/y_sort_enabled = true
 layer_0/z_index = 1
-layer_0/tile_data = PackedInt32Array(65543, 1966080, 0, 65545, 1572864, 20, 65551, 1572864, 20, 262161, 1572864, 20, 458767, 1572864, 20, 720912, 1572864, 20, 524296, 1638400, 20, 458764, 1638400, 20, 131089, 1769472, 20, 720914, 1769472, 20, 589838, 1835008, 20, 720906, 2293760, 8, 327690, 2293760, 8, 196627, 2162688, 0, 65548, 2162688, 0, 786452, 2162688, 0, 327686, 2162688, 0)
+layer_0/tile_data = PackedInt32Array(65543, 1966080, 0, 65545, 1572864, 20, 65551, 1572864, 20, 262161, 1572864, 20, 458767, 1572864, 20, 720912, 1572864, 20, 524296, 1638400, 20, 458764, 1638400, 20, 131089, 1769472, 20, 720914, 1769472, 20, 589838, 1835008, 20, 720906, 2293760, 8, 327690, 2293760, 8, 196627, 2162688, 0, 65548, 2162688, 0, 786452, 2162688, 0, 327686, 2162688, 0, 458751, 2162688, 5, 524287, 2162688, 6, 393216, 2228224, 5, 458752, 2228224, 6)
 
 [node name="TileMap3" type="TileMap" parent="."]
 z_index = 2
@@ -1582,6 +1583,9 @@ script = ExtResource("6_78gyg")
 hero_path = NodePath("../Player")
 
 [node name="pause_menu" parent="UI" instance=ExtResource("7_djsbv")]
+visible = false
+
+[node name="LoseMenu" parent="UI" instance=ExtResource("11_3ayon")]
 visible = false
 
 [node name="HPLabel" type="Label" parent="UI"]

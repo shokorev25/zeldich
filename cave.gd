@@ -2,6 +2,7 @@ extends Node2D
 
 @export var tilemap_path: NodePath
 @onready var hero := get_node_or_null("Player")
+@onready var lose_menu = get_node("UI/LoseMenu")
 
 func _ready():
 	

@@ -129,6 +129,7 @@ func die():
 	# Останавливаем весь мир
 	get_tree().paused = true
 	get_tree().current_scene.lose_menu.visible = true
+	PlayerData.previous_scene_player_hp = 10
 
 
 func _on_animation_finished():
