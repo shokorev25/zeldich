@@ -23,6 +23,7 @@ var attack_timer := 0.0
 var attack_wait_timer := 0.0
 var is_waiting_attack := false
 
+
 func _ready():
 	randomize()
 	hero = get_node(hero_node_path)
@@ -30,6 +31,13 @@ func _ready():
 	# Настройка NavigationAgent
 	nav_agent.path_desired_distance = 5.0  # чуть больше, чтобы не прилипал
 	nav_agent.target_desired_distance = 5.0
+	anim_sprite.play("default") # ⬅️ ВАЖНО
+	anim_sprite.animation_finished.connect(_on_animation_finished)
+
+func _on_animation_finished():
+	if anim_sprite.animation == "attack":
+		anim_sprite.play("default")
+
 
 
 func _physics_process(delta):
@@ -109,21 +117,51 @@ func process_agro(delta):
 		velocity = dir * speed
 
 func play_animation():
-	# Если проигрывается атака — ничего не делаем
-	if anim_sprite.animation.begins_with("attack"):
+	# если атака — не трогаем
+	if anim_sprite.animation == "attack":
 		return
-	if velocity.length() < 1:
+
+	# если не двигаемся вообще
+	if velocity.is_zero_approx():
 		anim_sprite.play("default")
 		return
 
+	var anim_name: String
+
 	if abs(velocity.x) > abs(velocity.y):
-		anim_sprite.play("right" if velocity.x > 0 else "left")
+		anim_name = "right" if velocity.x > 0 else "left"
 	else:
-		anim_sprite.play("down" if velocity.y > 0 else "up")
+		anim_name = "down" if velocity.y > 0 else "up"
+
+	if anim_sprite.animation != anim_name:
+		anim_sprite.play(anim_name)
+
+
+
+
+
+#func play_animation():
+	## Если проигрывается атака — ничего не делаем
+	#if anim_sprite.animation.begins_with("attack"):
+		#return
+	#if velocity.length() < 1:
+		#anim_sprite.play("default")
+		#return
+#
+	#if abs(velocity.x) > abs(velocity.y):
+		#anim_sprite.play("right" if velocity.x > 0 else "left")
+	#else:
+		#anim_sprite.play("down" if velocity.y > 0 else "up")
 
 func get_random_direction() -> Vector2:
-	var dirs = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT, Vector2.ZERO]
+	var dirs = [
+		Vector2.UP,
+		Vector2.DOWN,
+		Vector2.LEFT,
+		Vector2.RIGHT
+	]
 	return dirs.pick_random()
+
 
 func play_walk_animation(dir: Vector2):
 	if dir == Vector2.ZERO:
