@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://b6yq1b8tk0or2"]
+[gd_scene load_steps=22 format=3 uid="uid://b6yq1b8tk0or2"]
 
 [ext_resource type="Texture2D" uid="uid://dnydk18nyagik" path="res://asset/cave.png" id="1_ads45"]
 [ext_resource type="Script" uid="uid://dryjsv41gk4en" path="res://cave.gd" id="1_xtwoi"]
@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://bxwkacrfbjfr2" path="res://scenes/resourses/ui.gd" id="6_78gyg"]
 [ext_resource type="PackedScene" uid="uid://daadcq2xr5ahr" path="res://scenes/destroy_obj.tscn" id="6_djsbv"]
 [ext_resource type="PackedScene" uid="uid://yn86viinomhs" path="res://scenes/UI/pause_menu.tscn" id="7_djsbv"]
+[ext_resource type="Texture2D" uid="uid://cakikteh4nq85" path="res://asset/coin.png" id="9_c2qy3"]
+[ext_resource type="Texture2D" uid="uid://dw4seydymyyi4" path="res://asset/heart.png" id="9_wkdm5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_23xot"]
 texture = ExtResource("1_ads45")
@@ -1583,9 +1585,28 @@ hero_path = NodePath("../Player")
 visible = false
 
 [node name="HPLabel" type="Label" parent="UI"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_font_sizes/font_size = 64
+offset_left = 53.0
+offset_top = 8.0
+offset_right = 93.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 32
+
+[node name="CoinsLabel" type="Label" parent="UI"]
+offset_left = 54.0
+offset_top = 60.0
+offset_right = 94.0
+offset_bottom = 148.0
+theme_override_font_sizes/font_size = 32
+
+[node name="CoinSprite" type="Sprite2D" parent="UI"]
+position = Vector2(27.5, 83.5)
+scale = Vector2(3, 3)
+texture = ExtResource("9_c2qy3")
+
+[node name="HeartSprite" type="Sprite2D" parent="UI"]
+position = Vector2(27.5, 34.5)
+scale = Vector2(3, 3)
+texture = ExtResource("9_wkdm5")
 
 [node name="destroy_obj" parent="." instance=ExtResource("6_djsbv")]
 position = Vector2(48, 190)

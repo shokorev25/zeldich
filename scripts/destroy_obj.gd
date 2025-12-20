@@ -19,7 +19,7 @@ func _physics_process(delta):
 	var hero = get_tree().get_root().get_node("PathToPlayerNode")
 	if hero == null:
 		return
-
+	
 	if hero.is_currently_attacking() and not is_broken:
 		var attack_pos = hero.attack_hitbox_position()
 		if global_position.distance_to(attack_pos) <= 20:
@@ -45,16 +45,18 @@ func break_object():
 func _play_random_and_remove() -> void:
 	# Ждём 1 секунду после broken
 	await get_tree().create_timer(1.0).timeout
-
 	# Выбираем случайную анимацию
 	var r = randf()
 	var next_anim = ""
 	if r < 0.1:
-		next_anim = "anim1"
+		next_anim = "coin"
+		PlayerData.player_coins += 1
 	elif r < 0.6:
-		next_anim = "anim2"
+		next_anim = "heart"
+		PlayerData.hp_diff = 5
 	else:
-		next_anim = "anim3"
+		next_anim = "fire"
+		PlayerData.hp_diff = -3
 
 	anim.animation = next_anim
 	anim.play()

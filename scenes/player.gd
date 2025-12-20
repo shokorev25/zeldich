@@ -41,6 +41,14 @@ func _physics_process(delta):
 		velocity = Vector2.ZERO
 		move_and_slide()
 		return
+	
+	var player_hp_diff = PlayerData.hp_diff
+	if player_hp_diff > 0:
+		take_heal(player_hp_diff)
+		PlayerData.hp_diff = 0
+	elif player_hp_diff < 0:
+		take_damage(abs(player_hp_diff))
+		PlayerData.hp_diff = 0
 
 	# восстановление цвета после удара
 	if hurt_timer > 0:
@@ -103,6 +111,12 @@ func take_damage(damage: int):
 	if hp == 0:
 		die()
 
+func take_heal(heal: int):
+	if is_dead:
+		return
+	hp = min(hp + heal, 10)
+	print("Герой восстановил здоровье: ", heal, " HP: ", hp)
+	
 func die():
 	is_dead = true
 	is_attacking = false
