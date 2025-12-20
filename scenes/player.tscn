@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://b6v1ucw84b8k0"]
+[gd_scene load_steps=39 format=3 uid="uid://b6v1ucw84b8k0"]
 
 [ext_resource type="Script" uid="uid://ckeg1s701emx4" path="res://scenes/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://dnjmv02fed0p7" path="res://asset/character.png" id="2_qhqgy"]
@@ -39,6 +39,22 @@ region = Rect2(64, 93, 32, 31)
 [sub_resource type="AtlasTexture" id="AtlasTexture_31cv2"]
 atlas = ExtResource("3_qhqgy")
 region = Rect2(96, 93, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl8cc"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(0, 62, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_487ah"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(32, 62, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md1ol"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(64, 62, 32, 31)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bj30b"]
+atlas = ExtResource("3_qhqgy")
+region = Rect2(96, 62, 32, 31)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pf23h"]
 atlas = ExtResource("3_qhqgy")
@@ -160,7 +176,19 @@ animations = [{
 "name": &"attack_left",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl8cc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_487ah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md1ol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bj30b")
+}],
 "loop": false,
 "name": &"attack_right",
 "speed": 5.0
@@ -288,4 +316,4 @@ z_index = 2
 y_sort_enabled = true
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_smehm")
-animation = &"attack_up"
+animation = &"attack_right"

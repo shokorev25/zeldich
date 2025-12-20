@@ -137,22 +137,6 @@ func play_animation():
 		anim_sprite.play(anim_name)
 
 
-
-
-
-#func play_animation():
-	## Если проигрывается атака — ничего не делаем
-	#if anim_sprite.animation.begins_with("attack"):
-		#return
-	#if velocity.length() < 1:
-		#anim_sprite.play("default")
-		#return
-#
-	#if abs(velocity.x) > abs(velocity.y):
-		#anim_sprite.play("right" if velocity.x > 0 else "left")
-	#else:
-		#anim_sprite.play("down" if velocity.y > 0 else "up")
-
 func get_random_direction() -> Vector2:
 	var dirs = [
 		Vector2.UP,
