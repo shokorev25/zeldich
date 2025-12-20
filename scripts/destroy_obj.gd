@@ -16,14 +16,18 @@ func _ready():
 	randomize()  # либо RandomNumberGenerator для ещё более чистого подхода
 
 func _physics_process(delta):
-	var hero = get_tree().get_root().get_node("PathToPlayerNode")
-	if hero == null:
-		return
-	
-	if hero.is_currently_attacking() and not is_broken:
-		var attack_pos = hero.attack_hitbox_position()
-		if global_position.distance_to(attack_pos) <= 20:
-			take_damage(1)
+	pass
+	# А как это работает вообще???
+	#var hero = get_tree().get_root().get_node("PathToPlayerNode")
+	#if hero == null:
+		#return
+	#
+	#print(hero)
+	#
+	#if hero.is_currently_attacking() and not is_broken:
+		#var attack_pos = hero.attack_hitbox_position()
+		#if global_position.distance_to(attack_pos) <= 20:
+			#take_damage(1)
 
 func take_damage(amount: int):
 	hp -= amount

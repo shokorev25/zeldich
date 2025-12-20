@@ -25,6 +25,7 @@ func setup_camera_limits(tilemap: TileMap):
 	var tile_size = tilemap.tile_set.tile_size
 
 	camera.limit_left = used_rect.position.x * tile_size.x
+	print(camera.limit_left)
 	camera.limit_top = used_rect.position.y * tile_size.y
 	camera.limit_right = (used_rect.position.x + used_rect.size.x) * tile_size.x
 	camera.limit_bottom = (used_rect.position.y + used_rect.size.y) * tile_size.y
