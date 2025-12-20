@@ -28,6 +28,8 @@ func _on_continue_button_button_down() -> void:
 
 
 func _on_restart_button_button_down() -> void:
+	PlayerData.player_coins = 0
+	PlayerData.previous_scene_player_hp = 10
 	resume()
 	get_tree().reload_current_scene()
 
