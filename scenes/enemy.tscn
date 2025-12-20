@@ -1,7 +1,19 @@
-[gd_scene load_steps=27 format=3 uid="uid://c4t0rlacap6pt"]
+[gd_scene load_steps=30 format=3 uid="uid://c4t0rlacap6pt"]
 
 [ext_resource type="Texture2D" uid="uid://cd7g20m3jog3x" path="res://asset/log.png" id="1_7p1mj"]
 [ext_resource type="Script" uid="uid://du5jhs80dpei3" path="res://scenes/enemy.gd" id="1_md0e3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrm80"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6awcb"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(160, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjec0"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(160, 64, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ra3w"]
 atlas = ExtResource("1_7p1mj")
@@ -89,6 +101,20 @@ region = Rect2(96, 32, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2pwtc"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wrm80")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6awcb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjec0")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ra3w")
@@ -200,8 +226,9 @@ texture = ExtResource("1_7p1mj")
 z_index = 2
 y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_2pwtc")
-animation = &"left"
-frame_progress = 0.49199998
+animation = &"attack"
+frame = 2
+frame_progress = 1.0
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 0.5

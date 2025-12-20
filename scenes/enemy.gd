@@ -109,6 +109,9 @@ func process_agro(delta):
 		velocity = dir * speed
 
 func play_animation():
+	# Если проигрывается атака — ничего не делаем
+	if anim_sprite.animation.begins_with("attack"):
+		return
 	if velocity.length() < 1:
 		anim_sprite.play("default")
 		return

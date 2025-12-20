@@ -13,6 +13,9 @@ var is_dead := false   # ← ВАЖНО
 @export var tilemap_path: NodePath
 @onready var camera: Camera2D = $Camera2D
 
+@export var attack_range := 32  # радиус атаки по объектам
+@export var attack_damage := 1  # сколько урона наносим объекту
+
 func is_currently_attacking() -> bool:
 	return is_attacking
 
@@ -50,6 +53,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack") and not is_attacking:
 		is_attacking = true
 		anim_sprite.play("attack_down")
+		attack_objects()  # проверяем объекты рядом
 	elif not is_attacking:
 		if direction != Vector2.ZERO:
 			velocity = direction * speed
@@ -59,6 +63,32 @@ func _physics_process(delta):
 			play_idle()
 
 	move_and_slide()
+
+func attack_objects():
+	# Получаем все объекты, которые находятся в пределах атаки
+	var attack_pos = attack_hitbox_position()
+	# Предположим, что все разрушаемые объекты в группе "Destroyable"
+	var objects = get_tree().get_nodes_in_group("Destroyable")
+
+	for obj in objects:
+		if not is_instance_valid(obj):
+			continue
+		if obj.global_position.distance_to(attack_pos) <= attack_range:
+			obj.take_damage(attack_damage)
+
+func attack_hitbox_position() -> Vector2:
+	# Место, куда герой бьёт — можно сделать чуть перед ним
+	var dir = Vector2.ZERO
+	if anim_sprite.animation.begins_with("attack_down"):
+		dir = Vector2(0, 1)
+	elif anim_sprite.animation.begins_with("attack_up"):
+		dir = Vector2(0, -1)
+	elif anim_sprite.animation.begins_with("attack_right"):
+		dir = Vector2(1, 0)
+	elif anim_sprite.animation.begins_with("attack_left"):
+		dir = Vector2(-1, 0)
+	return global_position + dir * 20  # 20 = дистанция удара
+
 
 func take_damage(damage: int):
 	if is_dead:
