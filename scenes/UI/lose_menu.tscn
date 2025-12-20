@@ -1,0 +1,137 @@
+[gd_scene load_steps=9 format=3 uid="uid://b38aobkagdcfr"]
+
+[ext_resource type="Script" uid="uid://ceguajro1hxt8" path="res://scripts/lose_menu.gd" id="1_b4puo"]
+[ext_resource type="Shader" uid="uid://cgx5up3aqak7j" path="res://scenes/UI/pause_menu.gdshader" id="1_gi4id"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b4puo"]
+shader = ExtResource("1_gi4id")
+shader_parameter/lod = 1.0000000475
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6wg06"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 5
+shadow_offset = Vector2(2, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nh2yi"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 5
+shadow_offset = Vector2(2, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x86fj"]
+bg_color = Color(0.8862616, 0.88626146, 0.8862615, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 5
+shadow_offset = Vector2(2, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bckgk"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_size = 5
+shadow_offset = Vector2(2, 4)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_loxrp"]
+
+[node name="LoseMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b4puo")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_b4puo")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -110.0
+offset_top = -100.0
+offset_right = 110.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Restart_Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_6wg06")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nh2yi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x86fj")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_bckgk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_loxrp")
+text = "Restart"
+
+[node name="Exit_Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+theme_override_styles/normal = SubResource("StyleBoxFlat_6wg06")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_nh2yi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_x86fj")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_bckgk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_loxrp")
+text = "Exit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -140.0
+offset_top = -275.0
+offset_right = 140.0
+offset_bottom = -138.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "You Lose!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="VBoxContainer/Restart_Button" to="." method="_on_restart_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/Exit_Button" to="." method="_on_exit_button_button_down"]

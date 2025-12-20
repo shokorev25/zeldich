@@ -19,7 +19,7 @@ var idle_timer := 0.0
 @export var attack_cooldown := 1.0
 
 var attack_timer := 0.0
-@export var attack_delay := 1  # время в секундах перед атакой
+@export var attack_delay := 0.2  # время в секундах перед атакой
 var attack_wait_timer := 0.0
 var is_waiting_attack := false
 

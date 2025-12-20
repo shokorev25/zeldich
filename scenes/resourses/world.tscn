@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://hlfdr63jkog8"]
+[gd_scene load_steps=12 format=3 uid="uid://hlfdr63jkog8"]
 
+[ext_resource type="Script" uid="uid://df784qk4rwkq5" path="res://scripts/world.gd" id="1_2psxj"]
 [ext_resource type="TileSet" uid="uid://cm5x8tsa5luhe" path="res://scenes/resourses/world.tres" id="1_ylo3w"]
 [ext_resource type="PackedScene" uid="uid://b6v1ucw84b8k0" path="res://scenes/player.tscn" id="2_pksrh"]
 [ext_resource type="PackedScene" uid="uid://c4t0rlacap6pt" path="res://scenes/enemy.tscn" id="3_pksrh"]
 [ext_resource type="Script" uid="uid://bxwkacrfbjfr2" path="res://scenes/resourses/ui.gd" id="4_3wrfg"]
+[ext_resource type="PackedScene" uid="uid://yn86viinomhs" path="res://scenes/UI/pause_menu.tscn" id="5_xbl61"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pksrh"]
 vertices = PackedVector2Array(608.28906, 128.17969, 628.8281, 89.703125, 627.96094, 140.77344, 603.40625, 215.96875, 563.28906, 87.74219, 517.14844, 125.703125, 47.992188, 282.21875, 39.609375, 225.25781, 62.53125, 225.78906, 64.5, 261.27344, 891, 125.296875, 992.3281, 122.28906, 998, 298.89844, 949.3203, 312, 764.6406, 312, 747.34375, 278.40625, 831.8906, 180.46094, 1001.7422, 573.9531, 777.6797, 573.03906, 779.2969, 548.8594, 859.25, 555.9531, 1001.22656, 553.6875, 937.3125, 551.6719, 833.8672, 8.65625, 891, 12.3671875, 749.0703, 185.11719, 726.5781, 224.46094, 857.77344, 490.8672, 784.3672, 491.85156, 786.6406, 430.7578, 884, 467.75, 884, 520.64844, 939.3125, 522.6172, 252.64844, 380.85938, 174.5, 294.71875, 173.45313, 271.8203, 291.67188, 269.84375, 379.09375, 373.1328, 766.6406, 368.1328, 675.77344, 281.39063, 48.898438, 383.85156, 95.640625, 289.46094, 996.10156, 496, 948.3203, 496, 943.3594, 469.20313, 945.7031, 426.7578, 377.09375, 581.0703, 259.64844, 581.9219, 481.1328, 64.49219, 559.3906, 60.453125, 483.14063, 208.07031, 523.6875, 208.13281, 293.6797, 211.09375, 335.4297, 207, 736.28125, 132.60156, 671.14844, 221.38281, 90.609375, 263.35938)
@@ -24,6 +26,7 @@ size = Vector2(11, 660)
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_2psxj")
 
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 3
@@ -60,6 +63,9 @@ navigation_polygon = SubResource("NavigationPolygon_pksrh")
 process_mode = 3
 script = ExtResource("4_3wrfg")
 hero_path = NodePath("../Player")
+
+[node name="pause_menu" parent="UI" instance=ExtResource("5_xbl61")]
+visible = false
 
 [node name="HPLabel" type="Label" parent="UI"]
 offset_right = 40.0
