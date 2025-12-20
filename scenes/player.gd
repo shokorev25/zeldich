@@ -10,13 +10,26 @@ var is_attacking := false
 var hurt_timer := 0.0
 var is_dead := false   # ← ВАЖНО
 
+@export var tilemap_path: NodePath
+@onready var camera: Camera2D = $Camera2D
+
 func is_currently_attacking() -> bool:
 	return is_attacking
 
+
+func setup_camera_limits(tilemap: TileMap):
+	var used_rect = tilemap.get_used_rect()
+	var tile_size = tilemap.tile_set.tile_size
+
+	camera.limit_left = used_rect.position.x * tile_size.x
+	camera.limit_top = used_rect.position.y * tile_size.y
+	camera.limit_right = (used_rect.position.x + used_rect.size.x) * tile_size.x
+	camera.limit_bottom = (used_rect.position.y + used_rect.size.y) * tile_size.y
+
+
 func _ready():
 	anim_sprite.animation_finished.connect(_on_animation_finished)
-	if "Node2D" in get_tree().current_scene:
-		get_node("Camera2D").limit_right = 300
+	
 
 func _physics_process(delta):
 	

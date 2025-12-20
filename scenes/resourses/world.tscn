@@ -30,6 +30,7 @@ size = Vector2(26, 30)
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_2psxj")
+tilemap_path = NodePath("TileMap")
 
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 3
