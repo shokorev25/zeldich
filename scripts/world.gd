@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var pause_menu = get_node("UI/pause_menu")
-
+@onready var lose_menu = get_node("UI/LoseMenu")
 
 @export var tilemap_path: NodePath
 @onready var hero := get_node_or_null("Player")

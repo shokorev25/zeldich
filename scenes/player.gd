@@ -127,6 +127,7 @@ func die():
 
 	# Останавливаем весь мир
 	get_tree().paused = true
+	get_tree().current_scene.lose_menu.visible = true
 
 
 func _on_animation_finished():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://hlfdr63jkog8"]
+[gd_scene load_steps=16 format=3 uid="uid://hlfdr63jkog8"]
 
 [ext_resource type="Script" uid="uid://df784qk4rwkq5" path="res://scripts/world.gd" id="1_2psxj"]
 [ext_resource type="TileSet" uid="uid://cm5x8tsa5luhe" path="res://scenes/resourses/world.tres" id="1_ylo3w"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://bxwkacrfbjfr2" path="res://scenes/resourses/ui.gd" id="4_3wrfg"]
 [ext_resource type="PackedScene" uid="uid://yn86viinomhs" path="res://scenes/UI/pause_menu.tscn" id="5_xbl61"]
 [ext_resource type="Texture2D" uid="uid://cakikteh4nq85" path="res://asset/coin.png" id="7_6jfbl"]
+[ext_resource type="PackedScene" uid="uid://b38aobkagdcfr" path="res://scenes/UI/lose_menu.tscn" id="7_obsrr"]
 [ext_resource type="Texture2D" uid="uid://dw4seydymyyi4" path="res://asset/heart.png" id="8_obsrr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pksrh"]
@@ -53,6 +54,11 @@ layer_2/tile_data = PackedInt32Array(196664, 655360, 22, 131127, 720896, 23, 851
 
 [node name="Player" parent="." instance=ExtResource("2_pksrh")]
 position = Vector2(316, 157)
+speed = 80.0
+max_hp = 10
+tilemap_path = NodePath("")
+attack_range = 32
+attack_damage = 1
 
 [node name="enemy2" parent="." instance=ExtResource("3_pksrh")]
 position = Vector2(889, 180)
@@ -71,6 +77,9 @@ script = ExtResource("4_3wrfg")
 hero_path = NodePath("../Player")
 
 [node name="pause_menu" parent="UI" instance=ExtResource("5_xbl61")]
+visible = false
+
+[node name="LoseMenu" parent="UI" instance=ExtResource("7_obsrr")]
 visible = false
 
 [node name="HPLabel" type="Label" parent="UI"]
