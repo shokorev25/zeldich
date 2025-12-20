@@ -15,8 +15,12 @@ func is_currently_attacking() -> bool:
 
 func _ready():
 	anim_sprite.animation_finished.connect(_on_animation_finished)
+	if "Node2D" in get_tree().current_scene:
+		get_node("Camera2D").limit_right = 300
 
 func _physics_process(delta):
+	
+		
 	if is_dead:
 		velocity = Vector2.ZERO
 		move_and_slide()

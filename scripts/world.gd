@@ -11,3 +11,9 @@ func _process(delta: float) -> void:
 		#pause_menu.visible = true
 		#
 	pass
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	#print(body)
+	if "Player" in body.name:
+		get_tree().change_scene_to_file("res://cave.tscn")

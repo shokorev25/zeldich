@@ -1530,6 +1530,8 @@ layer_0/tile_data = PackedInt32Array(458771, 786432, 1, 720900, 786432, 1, 13107
 [node name="Player" parent="." instance=ExtResource("2_shk3w")]
 y_sort_enabled = true
 position = Vector2(40, 48)
+speed = 80.0
+max_hp = 10
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(40, 48)
